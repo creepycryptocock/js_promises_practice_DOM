@@ -28,21 +28,23 @@ const thirdPromise = new Promise((resolve) => {
   let leftClicked = false;
   let rightClicked = false;
 
+  function checkBothClick() {
+    if (leftClicked && rightClicked) {
+    resolve('Third promise was resolved');
+  }
+  }
+
   document.body.addEventListener('click', (e) => {
-    if (e.button === 0) {
       leftClicked = true;
-    }
+      checkBothClick();
+
   });
 
   document.body.addEventListener('contextmenu', (e) => {
-    if (e.button === 2) {
       rightClicked = true;
-    }
-  });
+      checkBothClick()
 
-  if (leftClicked && rightClicked) {
-    resolve('Third promise was resolved');
-  }
+  });
 });
 
 function error(msg) {
